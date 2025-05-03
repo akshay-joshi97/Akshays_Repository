@@ -1,22 +1,55 @@
-import java.util.ArrayList;
+import java.util.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        //System.out.println(args[0]);
-        //System.out.println(args[1]);
-        ArrayList<Integer> array1 = new ArrayList<Integer>();
-        //System.out.println(args.length);
-        //System.out.println(args);
-        System.out.println("Hello and welcome! All the best123");
+        final int N = 1_000_000;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        // Test MyHashSet
+        MyHashSet mySet = new MyHashSet();
+        long start = System.nanoTime();
+        for (int i = 0; i < N; i++) {
+            mySet.add(i);
         }
+        long end = System.nanoTime();
+        System.out.println("MyHashSet add time: " + (end - start) / 1e6 + " ms");
+
+        start = System.nanoTime();
+        for (int i = 0; i < N; i++) {
+            mySet.contains(i);
+        }
+        end = System.nanoTime();
+        System.out.println("MyHashSet contains time: " + (end - start) / 1e6 + " ms");
+
+        start = System.nanoTime();
+        for (int i = 0; i < N; i++) {
+            mySet.remove(i);
+        }
+        end = System.nanoTime();
+        System.out.println("MyHashSet remove time: " + (end - start) / 1e6 + " ms");
+
+        // Test Java's built-in HashSet
+        HashSet<Integer> hashSet = new HashSet<>();
+        start = System.nanoTime();
+        for (int i = 0; i < N; i++) {
+            hashSet.add(i);
+        }
+        end = System.nanoTime();
+        System.out.println("HashSet add time: " + (end - start) / 1e6 + " ms");
+
+        start = System.nanoTime();
+        for (int i = 0; i < N; i++) {
+            hashSet.contains(i);
+        }
+        end = System.nanoTime();
+        System.out.println("HashSet contains time: " + (end - start) / 1e6 + " ms");
+
+        start = System.nanoTime();
+        for (int i = 0; i < N; i++) {
+            hashSet.remove(i);
+        }
+        end = System.nanoTime();
+        System.out.println("HashSet remove time: " + (end - start) / 1e6 + " ms");
     }
 }
